@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aprèn els moviments · Mosaics de Barcelona</title>
+    <meta name="description" content="Translació, gir, simetria i lliscament: mou una F i fes que tapi una altra F.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/tokens.css?v=d0364676">
+    <link rel="stylesheet" href="css/mosaics.css?v=8753c6a9">
+</head>
+<body>
+    <header class="capcalera">
+        <h1><a href="index.html">Mosaics de Barcelona</a></h1>
+        <nav class="navegacio" aria-label="Seccions">
+            <a href="apren.html" aria-current="page">Aprèn</a>
+            <a href="taller.html">Taller</a>
+            <a href="classifica.html">Classifica</a>
+        </nav>
+    </header>
+
+    <main class="principal">
+        <div class="pestanyes" role="tablist" aria-label="Moviments" id="pestanyes"></div>
+        <div class="dues-columnes">
+            <section class="panell" aria-label="La F">
+                <div class="mesura" id="mesura">
+                    <canvas id="llenc" class="llenc" role="img" aria-label="La F original, la F de punts i la teva còpia"></canvas>
+                </div>
+                <p class="nota" id="llegenda"></p>
+            </section>
+            <section class="panell" aria-labelledby="titol" id="panell-llico" role="tabpanel">
+                <h2 id="titol"></h2>
+                <p id="explica"></p>
+                <p class="comptador" id="comptador"></p>
+                <p class="instruccio" id="instruccio"></p>
+                <div id="controls"></div>
+                <p class="nota" id="nota-nanses"></p>
+                <label class="interruptor" id="fila-preferencia" hidden><input type="checkbox" id="prefereix-controls"> Prefereixo els controls</label>
+                <div id="feedback" class="feedback" aria-live="polite"></div>
+                <div id="accions" class="accions"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="peu">
+        <p>
+            Material desenvolupat per David Arso Civil per al Departament de Matemàtiques de l’INS Miquel Tarradell.
+            Contingut sota CC BY-NC-SA 4.0, codi sota llicència MIT. <a href="LLICENCIA.md">Llicència</a>.
+        </p>
+    </footer>
+
+    <script src="js/motor/isometries.js?v=d82311ea"></script>
+    <script src="js/motor/grups.js?v=c838d4c0"></script>
+    <script src="js/motor/motiu.js?v=69af2281"></script>
+    <script src="js/motor/llicons.js?v=4d5633d7"></script>
+    <script src="js/ui/textos.js?v=6e62812b"></script>
+    <script src="js/ui/pinta.js?v=68e04030"></script>
+    <script src="js/ui/apren.js?v=9157c9f6"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mosaics de Barcelona · Step Quiz</title>
+    <meta name="description" content="Sanefes i moviments al pla: aprèn els moviments, fes la teva sanefa i classifica’n.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/tokens.css?v=d0364676">
+    <link rel="stylesheet" href="css/mosaics.css?v=8753c6a9">
+</head>
+<body>
+    <header class="capcalera">
+        <h1>Mosaics de Barcelona</h1>
+        <nav class="navegacio" aria-label="Seccions">
+            <a href="apren.html">Aprèn</a>
+            <a href="taller.html">Taller</a>
+            <a href="classifica.html">Classifica</a>
+        </nav>
+    </header>
+
+    <main class="principal">
+        <p>
+            Una <strong>sanefa</strong> és una franja on un mateix dibuix es repeteix: a les rajoles, a les reixes, als vestits.
+            Hi ha només <strong>7 tipus</strong>, segons quins moviments la deixen igual.
+        </p>
+        <p class="regla">Un moviment compta si la sanefa queda exactament igual, colors inclosos.</p>
+
+        <ul class="targetes">
+            <li><a class="targeta" href="apren.html">
+                <h2>1. Aprèn</h2>
+                <p>Els quatre moviments del pla amb una F: translació, gir, simetria i lliscament.</p>
+            </a></li>
+            <li><a class="targeta" href="taller.html">
+                <h2>2. Taller</h2>
+                <p>Dibuixa un motiu, tria com es repeteix i fes la teva sanefa. Desa-la o imprimeix-la per pintar.</p>
+            </a></li>
+            <li><a class="targeta" href="classifica.html">
+                <h2>3. Classifica</h2>
+                <p>Prova girs, miralls i lliscaments sobre una sanefa i descobreix de quin tipus és.</p>
+            </a></li>
+        </ul>
+
+        <section class="panell" aria-labelledby="t-tipus">
+            <h2 id="t-tipus">Els 7 tipus de sanefa</h2>
+            <div class="taula-wrap">
+                <table class="taula-grups">
+                    <thead>
+                        <tr><th scope="col">Símbol</th><th scope="col">Nom</th><th scope="col">Què la deixa igual, a més de la translació</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>p1</code></td><td>només translació</td><td>res més</td></tr>
+                        <tr><td><code>p11g</code></td><td>lliscament</td><td>un lliscament al llarg de l’eix</td></tr>
+                        <tr><td><code>p1m1</code></td><td>simetria vertical</td><td>miralls verticals</td></tr>
+                        <tr><td><code>p11m</code></td><td>simetria horitzontal</td><td>el mirall horitzontal</td></tr>
+                        <tr><td><code>p2</code></td><td>gir de 180°</td><td>girs de mitja volta</td></tr>
+                        <tr><td><code>p2mg</code></td><td>gir i simetria vertical</td><td>miralls verticals, girs de 180° fora dels miralls i un lliscament</td></tr>
+                        <tr><td><code>p2mm</code></td><td>totes les simetries</td><td>miralls verticals, el mirall horitzontal i girs de 180°</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="nota">
+                Per al professorat: «Classifica» fa servir sanefes generades (la clau és segura). Amb
+                <code>classifica.html?fixed=A</code> (o B, C), tota la classe té les mateixes sanefes. Les fotos
+                de sanefes reals de Barcelona arribaran més endavant. Res del que fa l’alumnat surt de l’ordinador.
+            </p>
+        </section>
+    </main>
+
+    <footer class="peu">
+        <p>
+            Material desenvolupat per David Arso Civil per al Departament de Matemàtiques de l’INS Miquel Tarradell.
+            Contingut sota CC BY-NC-SA 4.0, codi sota llicència MIT. <a href="LLICENCIA.md">Llicència</a>.
+        </p>
+    </footer>
+</body>
+</html>

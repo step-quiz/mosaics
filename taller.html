@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Taller de sanefes · Mosaics de Barcelona</title>
+    <meta name="description" content="Dibuixa un motiu, tria com es repeteix i fes una sanefa.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/tokens.css?v=d0364676">
+    <link rel="stylesheet" href="css/mosaics.css?v=8753c6a9">
+</head>
+<body>
+    <header class="capcalera">
+        <h1><a href="index.html">Mosaics de Barcelona</a></h1>
+        <nav class="navegacio" aria-label="Seccions">
+            <a href="apren.html">Aprèn</a>
+            <a href="taller.html" aria-current="page">Taller</a>
+            <a href="classifica.html">Classifica</a>
+        </nav>
+    </header>
+
+    <main class="principal taller">
+        <section class="panell" aria-labelledby="t-motiu">
+            <h2 id="t-motiu">1. El motiu</h2>
+            <div class="fila" role="group" aria-label="Eina">
+                <button type="button" class="btn btn-petit" id="eina-traç" aria-pressed="true">Traç a mà</button>
+                <button type="button" class="btn btn-petit" id="eina-poligon" aria-pressed="false">Polígon</button>
+            </div>
+            <p id="instr-eina" class="nota"></p>
+            <div class="mesura" id="mesura-editor">
+                <canvas id="editor" class="llenc llenc-editor" tabindex="0" role="img" aria-label="El motiu: un quadrat on dibuixes"></canvas>
+            </div>
+            <div id="anunci-editor" class="sr" aria-live="polite"></div>
+            <div class="paleta fila" role="group" aria-label="Color">
+                <button type="button" class="color color-0" data-color="0" aria-pressed="true" aria-label="Vermell"></button>
+                <button type="button" class="color color-1" data-color="1" aria-pressed="false" aria-label="Blau"></button>
+                <button type="button" class="color color-2" data-color="2" aria-pressed="false" aria-label="Ocre"></button>
+                <button type="button" class="color color-3" data-color="3" aria-pressed="false" aria-label="Verd"></button>
+            </div>
+            <div class="accions">
+                <button type="button" class="btn btn-petit" id="btn-tanca" hidden>Tanca el polígon</button>
+                <button type="button" class="btn btn-petit" id="btn-desfes">Desfés</button>
+                <button type="button" class="btn btn-petit" id="btn-esborra">Esborra-ho tot</button>
+            </div>
+            <h3>Models</h3>
+            <div class="fila" id="models"></div>
+            <p class="nota" id="nota-teclat"></p>
+        </section>
+
+        <section class="panell" aria-labelledby="t-sanefa">
+            <h2 id="t-sanefa">2. La sanefa</h2>
+            <fieldset class="grups" id="grups">
+                <legend class="sr">Tria com es repeteix</legend>
+            </fieldset>
+            <div class="mesura" id="mesura-sanefa">
+                <canvas id="sanefa" class="llenc llenc-sanefa" role="img" aria-label="La sanefa"></canvas>
+            </div>
+            <div id="feedback" class="feedback" aria-live="polite"></div>
+            <label class="interruptor"><input type="checkbox" id="mostra-sim"> Mostra les simetries</label>
+            <ul class="llegenda" id="llegenda" hidden>
+                <li><svg viewBox="0 0 34 16" aria-hidden="true"><line class="s-linia" x1="2" y1="8" x2="32" y2="8"/></svg>mirall</li>
+                <li><svg viewBox="0 0 34 16" aria-hidden="true"><line class="s-discontinua" x1="2" y1="8" x2="32" y2="8"/></svg>eix de lliscament</li>
+                <li><svg viewBox="0 0 34 16" aria-hidden="true"><ellipse class="s-lent" cx="17" cy="8" rx="4.5" ry="7.5"/></svg>centre de gir de 180°</li>
+            </ul>
+            <div class="accions">
+                <button type="button" class="btn" id="btn-png">Desa la imatge (PNG)</button>
+                <button type="button" class="btn" id="btn-imprimeix">Imprimeix per pintar</button>
+            </div>
+            <p class="nota">El motiu es desa només en aquest navegador.</p>
+        </section>
+    </main>
+
+    <section id="full-imprimir" class="nomes-impres" aria-hidden="true"></section>
+
+    <footer class="peu">
+        <p>
+            Material desenvolupat per David Arso Civil per al Departament de Matemàtiques de l’INS Miquel Tarradell.
+            Contingut sota CC BY-NC-SA 4.0, codi sota llicència MIT. <a href="LLICENCIA.md">Llicència</a>.
+        </p>
+    </footer>
+
+    <script src="js/motor/isometries.js?v=d82311ea"></script>
+    <script src="js/motor/grups.js?v=c838d4c0"></script>
+    <script src="js/motor/deteccio.js?v=dd42025a"></script>
+    <script src="js/motor/motiu.js?v=69af2281"></script>
+    <script src="js/ui/textos.js?v=6e62812b"></script>
+    <script src="js/ui/pinta.js?v=68e04030"></script>
+    <script src="js/ui/taller.js?v=e887cd22"></script>
+</body>
+</html>

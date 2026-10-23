@@ -1,0 +1,78 @@
+/*
+============================================================================
+PROJECTE: mosaics (Step Quiz, vanilla JS)
+FITXER: css/tokens.css
+ROL: Colors i mides comuns, en mode clar i fosc. La resta dels estils només
+     fan servir aquestes variables. Contrast del text ≥ 4,5:1.
+DEPENDÈNCIES: cap. Es carrega abans de css/mosaics.css.
+============================================================================
+*/
+:root {
+    --text: #1e293b;
+    --text-suau: #475569;
+    --fons: #f8fafc;
+    --panell: #ffffff;
+    --vora-panell: #e2e8f0;
+    --primari: #9a3412;
+    --primari-fosc: #7c2d12;
+    --primari-clar: #ffedd5;
+    --be: #047857;
+    --be-fons: #d1fae5;
+    --error: #b91c1c;
+    --error-fons: #fee2e2;
+    --info: #1d4ed8;
+    --info-fons: #dbeafe;
+
+    /* Sanefes (canvas: js/ui/pinta.js les llegeix) */
+    --m-fons: #fffdf7;
+    --m-franja: #f5efe2;
+    --m-vora: #a8a29e;
+    --m-sim: #0e7490;
+    --m-graella: #e7e5e4;
+    --m-original: #a8a29e;
+    --m-objectiu: #44403c;
+    --m-copia: #b91c1c;
+    --m-nansa: #1d4ed8;
+    --m-c0: #b91c1c;
+    --m-c1: #1d4ed8;
+    --m-c2: #ca8a04;
+    --m-c3: #15803d;
+
+    --radi: 10px;
+    --ombra: 0 1px 3px rgba(15, 23, 42, 0.08);
+    --lletra: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text: #e2e8f0;
+        --text-suau: #94a3b8;
+        --fons: #0f172a;
+        --panell: #1e293b;
+        --vora-panell: #334155;
+        --primari: #fdba74;
+        --primari-fosc: #fed7aa;
+        --primari-clar: #431407;
+        --be: #6ee7b7;
+        --be-fons: #064e3b;
+        --error: #fca5a5;
+        --error-fons: #450a0a;
+        --info: #93c5fd;
+        --info-fons: #1e3a8a;
+
+        --m-fons: #1c1917;
+        --m-franja: #292524;
+        --m-vora: #78716c;
+        --m-sim: #22d3ee;
+        --m-graella: #292524;
+        --m-original: #57534e;
+        --m-objectiu: #e7e5e4;
+        --m-copia: #f87171;
+        --m-nansa: #93c5fd;
+        --m-c0: #ef4444;
+        --m-c1: #60a5fa;
+        --m-c2: #facc15;
+        --m-c3: #4ade80;
+        --ombra: none;
+    }
+}

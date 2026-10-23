@@ -1,0 +1,536 @@
+/*
+============================================================================
+PROJECTE: mosaics (Step Quiz, vanilla JS)
+FITXER: css/mosaics.css
+ROL: Estils de les quatre pàgines (index, Aprèn, Taller, Classifica): capçalera
+     i navegació, panells, canvas, eines, preguntes, retroacció i impressió
+     (el full per pintar, negre sobre blanc, A4 amb marges de 15 mm).
+DEPENDÈNCIES: css/tokens.css (es carrega abans).
+============================================================================
+*/
+* {
+    box-sizing: border-box;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    margin: 0;
+    padding: 12px 16px 32px;
+    font-family: var(--lletra);
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--text);
+    background: var(--fons);
+}
+button,
+input,
+select {
+    font: inherit;
+}
+[hidden] {
+    display: none !important;
+}
+.sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+.nomes-impres {
+    display: none;
+}
+
+/* ── Capçalera i navegació ─────────────────────────────────────────────── */
+.capcalera {
+    max-width: 1100px;
+    margin: 0 auto 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 16px;
+}
+.capcalera h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--primari-fosc);
+}
+.capcalera h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+.navegacio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.navegacio a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border: 1px solid var(--vora-panell);
+    border-radius: 999px;
+    background: var(--panell);
+    color: var(--text);
+    text-decoration: none;
+}
+.navegacio a[aria-current='page'] {
+    background: var(--primari);
+    border-color: var(--primari);
+    color: var(--panell);
+    font-weight: 600;
+}
+
+/* ── Panells ───────────────────────────────────────────────────────────── */
+.principal {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.panell {
+    background: var(--panell);
+    border: 1px solid var(--vora-panell);
+    border-radius: var(--radi);
+    box-shadow: var(--ombra);
+    padding: 12px;
+    margin-bottom: 14px;
+    min-width: 0;
+}
+.panell h2 {
+    margin: 0 0 8px;
+    font-size: 1.15em;
+}
+.panell h3 {
+    margin: 12px 0 6px;
+    font-size: 1em;
+}
+.dues-columnes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+.taller {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+@media (max-width: 760px) {
+    .dues-columnes,
+    .taller {
+        grid-template-columns: 1fr;
+    }
+}
+.instruccio {
+    font-weight: 600;
+    margin: 8px 0;
+}
+.nota {
+    color: var(--text-suau);
+    font-size: 0.92em;
+    margin: 6px 0;
+}
+.regla {
+    border-left: 4px solid var(--primari);
+    padding: 4px 10px;
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+/* ── Canvas ────────────────────────────────────────────────────────────── */
+.llenc {
+    display: block;
+    max-width: 100%;
+    border-radius: 8px;
+    touch-action: none; /* només als canvas: la resta de la pàgina es pot desplaçar */
+    user-select: none;
+    -webkit-user-select: none;
+}
+.llenc-editor {
+    margin: 0 auto;
+    cursor: crosshair;
+}
+.llenc-sanefa {
+    touch-action: pan-y; /* la sanefa del Taller només es mira: deixa desplaçar la pàgina */
+}
+.llenc-prova {
+    cursor: crosshair;
+}
+.llenc:focus-visible {
+    outline: 3px solid var(--info);
+    outline-offset: 3px;
+}
+.mesura {
+    width: 100%;
+}
+
+/* ── Botons i controls ─────────────────────────────────────────────────── */
+.accions,
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+.btn {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 2px solid var(--primari);
+    border-radius: 8px;
+    background: var(--panell);
+    color: var(--primari-fosc);
+    font-weight: 600;
+    cursor: pointer;
+}
+.fila select {
+    min-height: 44px;
+    padding: 6px 10px;
+    border: 2px solid var(--vora-panell);
+    border-radius: 8px;
+    background: var(--panell);
+    color: var(--text);
+}
+.btn-principal {
+    background: var(--primari);
+    color: var(--panell);
+}
+.btn[aria-pressed='true'] {
+    background: var(--primari);
+    color: var(--panell);
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.btn-petit {
+    min-height: 36px;
+    padding: 4px 10px;
+    font-size: 0.9em;
+}
+.btn:focus-visible,
+.navegacio a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.color:focus-visible,
+.opcio-grup input:focus-visible + span {
+    outline: 3px solid var(--info);
+    outline-offset: 2px;
+}
+.paleta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.color {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid var(--panell);
+    box-shadow: 0 0 0 2px var(--vora-panell);
+    cursor: pointer;
+}
+.color[aria-pressed='true'] {
+    box-shadow: 0 0 0 3px var(--text);
+}
+.color-0 {
+    background: var(--m-c0);
+}
+.color-1 {
+    background: var(--m-c1);
+}
+.color-2 {
+    background: var(--m-c2);
+}
+.color-3 {
+    background: var(--m-c3);
+}
+
+/* Tria del grup: botons de ràdio amb aspecte de targeta */
+.grups {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 6px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+.opcio-grup {
+    position: relative;
+    display: block;
+}
+.opcio-grup input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+}
+.opcio-grup span {
+    display: block;
+    min-height: 44px;
+    padding: 6px 10px;
+    border: 2px solid var(--vora-panell);
+    border-radius: 8px;
+    background: var(--panell);
+}
+.opcio-grup b {
+    display: block;
+    font-family: ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
+}
+.opcio-grup input:checked + span {
+    border-color: var(--primari);
+    background: var(--primari-clar);
+}
+.control {
+    display: grid;
+    grid-template-columns: 9em minmax(0, 1fr) 3.5em;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+}
+.control input[type='range'] {
+    width: 100%;
+    min-height: 44px;
+    accent-color: var(--primari);
+}
+.control output {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+@media (max-width: 420px) {
+    .control {
+        grid-template-columns: 6.5em minmax(0, 1fr) 3em;
+        font-size: 0.92em;
+    }
+}
+.interruptor {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    cursor: pointer;
+}
+.interruptor input {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--primari);
+}
+
+/* Llegenda dels símbols */
+.llegenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--text-suau);
+    font-size: 0.92em;
+}
+.llegenda svg {
+    width: 34px;
+    height: 16px;
+    vertical-align: -3px;
+    margin-right: 4px;
+}
+.s-linia {
+    stroke: var(--m-sim);
+    stroke-width: 3;
+}
+.s-discontinua {
+    stroke: var(--m-sim);
+    stroke-width: 3;
+    stroke-dasharray: 7 5;
+}
+.s-lent {
+    fill: var(--m-sim);
+}
+
+/* ── Pestanyes (Aprèn) ─────────────────────────────────────────────────── */
+.pestanyes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+.pestanya {
+    min-height: 44px;
+    padding: 6px 14px;
+    border: 1px solid var(--vora-panell);
+    border-radius: 999px;
+    background: var(--panell);
+    color: var(--text);
+    cursor: pointer;
+}
+.pestanya[aria-selected='true'] {
+    background: var(--primari);
+    border-color: var(--primari);
+    color: var(--panell);
+    font-weight: 600;
+}
+.pestanya .fet {
+    margin-left: 4px;
+}
+
+/* ── Preguntes (Classifica) ────────────────────────────────────────────── */
+.pregunta {
+    font-size: 1.15em;
+    font-weight: 700;
+    margin: 6px 0 2px;
+}
+.resum {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.resum li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--vora-panell);
+}
+.resum .r {
+    font-weight: 700;
+}
+.resultat {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--primari-fosc);
+}
+.comptador {
+    margin: 0;
+    color: var(--text-suau);
+    font-weight: 600;
+}
+
+/* ── Retroacció ────────────────────────────────────────────────────────── */
+.feedback .fb {
+    margin: 8px 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+.fb-error {
+    background: var(--error-fons);
+    color: var(--error);
+}
+.fb-be {
+    background: var(--be-fons);
+    color: var(--be);
+}
+.fb-info {
+    background: var(--info-fons);
+    color: var(--info);
+}
+
+/* ── Portal (index.html) ───────────────────────────────────────────────── */
+.targetes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+}
+.targeta {
+    display: block;
+    height: 100%;
+    padding: 14px;
+    background: var(--panell);
+    border: 1px solid var(--vora-panell);
+    border-radius: var(--radi);
+    box-shadow: var(--ombra);
+    color: var(--text);
+    text-decoration: none;
+}
+.targeta:hover {
+    border-color: var(--primari);
+}
+.targeta:focus-visible {
+    outline: 3px solid var(--info);
+    outline-offset: 2px;
+}
+.targeta h2 {
+    margin: 4px 0 6px;
+    color: var(--primari-fosc);
+}
+.targeta p {
+    margin: 0;
+}
+.taula-grups {
+    border-collapse: collapse;
+    width: 100%;
+}
+.taula-grups th,
+.taula-grups td {
+    border-bottom: 1px solid var(--vora-panell);
+    padding: 6px 8px;
+    text-align: left;
+    vertical-align: top;
+}
+.taula-grups code {
+    font-weight: 700;
+}
+.taula-wrap {
+    overflow-x: auto;
+}
+
+.peu {
+    max-width: 1100px;
+    margin: 18px auto 0;
+    color: var(--text-suau);
+    font-size: 0.85em;
+}
+.peu a {
+    color: inherit;
+}
+
+/* ── Impressió: només el full per pintar ───────────────────────────────── */
+@page {
+    size: A4;
+    margin: 15mm;
+}
+@media print {
+    body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 12pt;
+    }
+    body.imprimeix-full > *:not(#full-imprimir) {
+        display: none !important;
+    }
+    body.imprimeix-full #full-imprimir {
+        display: block !important;
+    }
+    #full-imprimir h2 {
+        margin: 0 0 6mm;
+        font-size: 16pt;
+    }
+    #full-imprimir img {
+        display: block;
+        width: 100%;
+        margin: 0 0 10mm;
+        break-inside: avoid;
+    }
+    #full-imprimir p {
+        margin: 0;
+    }
+    .navegacio,
+    .accions,
+    .peu {
+        display: none !important;
+    }
+    .panell {
+        border: 1px solid #000;
+        box-shadow: none;
+        background: #fff;
+    }
+}

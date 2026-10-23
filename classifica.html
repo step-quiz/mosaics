@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Classifica sanefes · Mosaics de Barcelona</title>
+    <meta name="description" content="Prova girs, miralls i lliscaments sobre una sanefa i descobreix de quin tipus és.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/tokens.css?v=d0364676">
+    <link rel="stylesheet" href="css/mosaics.css?v=8753c6a9">
+</head>
+<body>
+    <header class="capcalera">
+        <h1><a href="index.html">Mosaics de Barcelona</a></h1>
+        <nav class="navegacio" aria-label="Seccions">
+            <a href="apren.html">Aprèn</a>
+            <a href="taller.html">Taller</a>
+            <a href="classifica.html" aria-current="page">Classifica</a>
+        </nav>
+    </header>
+
+    <main class="principal">
+        <section class="panell" aria-labelledby="t-sanefa">
+            <div class="fila">
+                <h2 id="t-sanefa">Quin tipus de sanefa és?</h2>
+                <p id="comptador" class="comptador"></p>
+            </div>
+            <p class="regla" id="regla"></p>
+            <div class="mesura" id="mesura">
+                <canvas id="llenc" class="llenc llenc-prova" tabindex="0" role="img" aria-label="La sanefa"></canvas>
+            </div>
+            <div id="anunci" class="sr" aria-live="polite"></div>
+        </section>
+
+        <div class="dues-columnes">
+            <section class="panell" aria-labelledby="t-eines">
+                <h2 id="t-eines">Eines</h2>
+                <p class="nota" id="prova-eines"></p>
+                <div class="fila" role="group" aria-label="Eina">
+                    <button type="button" class="btn btn-petit" data-eina="gir" aria-pressed="false">Gir</button>
+                    <button type="button" class="btn btn-petit" data-eina="mirall" aria-pressed="false">Mirall</button>
+                    <button type="button" class="btn btn-petit" data-eina="lliscament" aria-pressed="false">Lliscament</button>
+                    <button type="button" class="btn btn-petit" id="btn-treu">Treu la còpia</button>
+                </div>
+                <div class="fila" id="fila-angle" hidden>
+                    <label for="angle">Angle</label>
+                    <select id="angle">
+                        <option value="180">180°</option>
+                        <option value="120">120°</option>
+                        <option value="90">90°</option>
+                        <option value="60">60°</option>
+                    </select>
+                </div>
+                <div class="control" id="fila-despl" hidden>
+                    <label for="despl">Desplaçament</label>
+                    <input type="range" id="despl" min="-4" max="4" step="0.25" value="0">
+                    <output id="despl-valor" for="despl">0</output>
+                </div>
+                <p class="instruccio" id="instr-eina"></p>
+                <p class="nota">Teclat: Tab fins a la sanefa; fletxes per moure el cursor; Retorn per tocar.</p>
+            </section>
+
+            <section class="panell" aria-labelledby="t-preguntes">
+                <h2 id="t-preguntes">Preguntes</h2>
+                <div id="pregunta-zona">
+                    <p class="pregunta" id="pregunta"></p>
+                    <p class="nota" id="explica"></p>
+                    <div class="accions">
+                        <button type="button" class="btn btn-petit" id="btn-prova"></button>
+                    </div>
+                    <div class="accions">
+                        <button type="button" class="btn btn-principal" id="btn-si">Sí</button>
+                        <button type="button" class="btn btn-principal" id="btn-no">No</button>
+                    </div>
+                </div>
+                <p class="resultat" id="resultat" hidden></p>
+                <div id="feedback" class="feedback" aria-live="polite"></div>
+                <div id="accions" class="accions"></div>
+                <h3 id="t-resum" hidden>Les teves respostes</h3>
+                <ol class="resum" id="resum"></ol>
+            </section>
+        </div>
+        <p class="nota" id="fotos-aviat"></p>
+    </main>
+
+    <footer class="peu">
+        <p>
+            Material desenvolupat per David Arso Civil per al Departament de Matemàtiques de l’INS Miquel Tarradell.
+            Contingut sota CC BY-NC-SA 4.0, codi sota llicència MIT. <a href="LLICENCIA.md">Llicència</a>.
+        </p>
+    </footer>
+
+    <script src="js/motor/atzar.js?v=6d2184b7"></script>
+    <script src="js/motor/isometries.js?v=d82311ea"></script>
+    <script src="js/motor/grups.js?v=c838d4c0"></script>
+    <script src="js/motor/deteccio.js?v=dd42025a"></script>
+    <script src="js/motor/arbre.js?v=60283fab"></script>
+    <script src="js/motor/motiu.js?v=69af2281"></script>
+    <script src="js/ui/textos.js?v=6e62812b"></script>
+    <script src="js/ui/pinta.js?v=68e04030"></script>
+    <script src="js/ui/classifica.js?v=e9e8f0e7"></script>
+</body>
+</html>
